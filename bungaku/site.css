@@ -1,0 +1,18 @@
+:root { --accent: #2f6f9f; --accent-dark: #8cc0e6; }
+
+/* 人物相関図（SVGは色を持たず、classにこのCSSで配色を与える。アプリと同じ考え方） */
+svg.chart { width: 100%; height: auto; min-width: 34rem; }
+.chart-card { fill: var(--card); stroke: var(--line); stroke-width: 1.2; }
+.chart-node-male .chart-card { stroke: #4a7fb5; }
+.chart-node-female .chart-card { stroke: #b5657f; }
+.chart-node-main .chart-card { fill: var(--paper-2); stroke-width: 2.6; }
+.chart-name { fill: var(--ink); font-size: 19px; text-anchor: middle; }
+.chart-reading { fill: var(--muted); font-size: 9.5px; text-anchor: middle; }
+.chart-role { fill: var(--muted); font-size: 11.5px; text-anchor: middle; }
+.chart-edge { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.chart-edge-broken { stroke-dasharray: 7 5; }
+.chart-edge-dotted { stroke-dasharray: 2 4; }
+.chart-arrow-head { fill: var(--muted); }
+.chart-label-bg { fill: var(--card); }
+.chart-label { fill: var(--ink); font-size: 11px; text-anchor: middle; }
+svg.chart text { font-family: var(--sans); }

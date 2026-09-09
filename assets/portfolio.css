@@ -339,6 +339,33 @@ a { color: inherit; }
   color: var(--ink-3);
 }
 
+/* 一覧に添える画面写真。各アプリ 1 枚まで、.app の直下・.app-body の次に置く。
+   写真のあるカードだけ 4 列目が増える（:has 未対応のブラウザでも
+   暗黙の列に落ちて同じ見た目になる）。srcset には 320w / 400w / 640w を渡す。 */
+.app:has(.app-shot) {
+  grid-template-columns: 3.6rem minmax(0, 15.5rem) minmax(0, 1fr) 10.5rem;
+}
+.app-shot {
+  grid-column: 4;
+  grid-row: 1;
+  margin: 0;
+  max-width: 10.5rem;
+}
+.app-shot img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  box-shadow: 0 14px 30px -14px rgba(16, 17, 19, 0.28),
+              0 2px 6px -2px rgba(16, 17, 19, 0.09);
+}
+@media (prefers-color-scheme: dark) {
+  .app-shot img {
+    box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.72),
+                0 2px 6px -2px rgba(0, 0, 0, 0.5);
+  }
+}
+
 .app-desc {
   margin: 0;
   font-size: 0.925rem;
@@ -436,13 +463,31 @@ a { color: inherit; }
 }
 .lnk:hover .arw { transform: translate(2px, -2px); }
 
+/* 中間の幅では 4 列にすると本文が狭くなりすぎるので、
+   写真を 3 列のままアプリ名の下（2 列目・2 行目）へ回す */
+@media (max-width: 64rem) {
+  .app:has(.app-shot) {
+    grid-template-columns: 3.6rem minmax(0, 15.5rem) minmax(0, 1fr);
+  }
+  .app-shot { grid-column: 2; grid-row: 2; margin-top: 22px; }
+}
+
 @media (max-width: 52rem) {
-  .app {
+  .app,
+  .app:has(.app-shot) {
     grid-template-columns: 1fr;
     gap: 0;
   }
   .app-no { padding-top: 0; margin-bottom: 14px; font-size: 0.72rem; }
-  .app-body { margin-top: 18px; }
+  /* 縦積みでは 名前 → 画面写真 → 説明 の順に読ませる */
+  .app-shot {
+    grid-column: auto;
+    grid-row: auto;
+    order: 1;
+    margin: 20px auto 0;
+    max-width: 12rem;
+  }
+  .app-body { order: 2; margin-top: 18px; }
   /* 狭い画面ではアイコンを名前の左へ並べる */
   .app-id { display: flex; align-items: center; gap: 15px; }
   .app-icon { width: 52px; height: 52px; margin-bottom: 0; }

@@ -1,0 +1,279 @@
+/* superrealism.github.io — アプリ個別ランディングページ（/lp/*）
+   portfolio.css を読み込んだうえで、その後に読み込む。トークンは portfolio.css 側の定義を使う。 */
+
+/* ───────── パンくず ───────── */
+
+.crumbs {
+  padding-top: clamp(26px, 4vw, 40px);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+}
+.crumbs ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55em;
+  margin: 0;
+  padding: 0;
+}
+.crumbs li + li::before {
+  content: "/";
+  margin-right: 0.55em;
+  color: var(--line-2);
+}
+.crumbs a { color: var(--ink-3); text-decoration: none; transition: color 0.2s var(--ease); }
+.crumbs a:hover { color: var(--ink); }
+
+/* ───────── ヒーロー ───────── */
+
+.lp-hero { padding: clamp(24px, 3.5vw, 40px) 0 0; }
+
+.lp-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 17.5rem);
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+}
+
+.lp-hero .app-icon { width: 72px; height: 72px; margin-bottom: 22px; }
+
+.lp-hero h1 {
+  font-size: clamp(1.85rem, 4.4vw, 2.9rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.34;
+  margin: 0;
+}
+.lp-hero h1 .sub {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+}
+
+.lp-lead {
+  margin: 26px 0 0;
+  max-width: 34rem;
+  color: var(--ink-2);
+  font-size: clamp(0.93rem, 1.3vw, 1rem);
+  line-height: 2.05;
+}
+
+.lp-hero .tags { margin-top: 22px; }
+.lp-hero .app-links { margin-top: 26px; }
+
+@media (max-width: 52rem) {
+  .lp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .lp-hero .shot { max-width: 16rem; margin-inline: auto; }
+}
+
+/* ───────── スクリーンショット ───────── */
+
+.shot { margin: 0; }
+.shot img {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  box-shadow: 0 22px 48px -20px rgba(16, 17, 19, 0.30),
+              0 3px 10px -3px rgba(16, 17, 19, 0.10);
+}
+.shot figcaption {
+  margin-top: 14px;
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: var(--ink-3);
+  text-align: center;
+}
+@media (prefers-color-scheme: dark) {
+  .shot img {
+    box-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.75),
+                0 3px 10px -3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ───────── 数字 ───────── */
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: 1px;
+  margin: 0;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.specs > div { background: var(--bg); padding: 22px 22px 24px; }
+.specs dt {
+  font-family: var(--mono);
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.specs dd {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+/* ───────── 機能 ───────── */
+
+.features { list-style: none; margin: 0; padding: 0; }
+
+.feature {
+  display: grid;
+  grid-template-columns: 3.6rem minmax(0, 1fr);
+  gap: 0 32px;
+  padding: clamp(28px, 4vw, 42px) 0;
+  border-top: 1px solid var(--line);
+}
+.feature:last-child { border-bottom: 1px solid var(--line); }
+
+.feature .n {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  padding-top: 0.4em;
+  font-variant-numeric: tabular-nums;
+}
+.feature h3 {
+  margin: 0 0 14px;
+  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.6;
+}
+.feature p {
+  margin: 0;
+  max-width: 40rem;
+  font-size: 0.925rem;
+  line-height: 2;
+  color: var(--ink-2);
+}
+.feature p + p { margin-top: 1.2em; }
+
+/* 画面写真を添える機能ブロック（スクリーンショットが揃い次第 has-shot を付ける） */
+.feature.has-shot { grid-template-columns: 3.6rem minmax(0, 1fr) 15rem; }
+.feature.has-shot .shot img { border-radius: 14px; }
+
+@media (max-width: 52rem) {
+  .feature,
+  .feature.has-shot { grid-template-columns: 1fr; gap: 0; }
+  .feature .n { padding-top: 0; margin-bottom: 12px; font-size: 0.72rem; }
+  .feature.has-shot .shot { margin: 26px auto 0; max-width: 14rem; }
+}
+
+/* ───────── こんな方に ───────── */
+
+.uses {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 44rem;
+}
+.uses li {
+  position: relative;
+  padding: 0 0 0 1.6em;
+  margin-bottom: 0.85em;
+  font-size: 0.925rem;
+  line-height: 2;
+  color: var(--ink-2);
+}
+.uses li:last-child { margin-bottom: 0; }
+.uses li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  font-family: var(--mono);
+  color: var(--ink-3);
+}
+
+/* ───────── 本文ブロック ───────── */
+
+.prose {
+  margin: 0;
+  max-width: 44rem;
+  font-size: 0.925rem;
+  line-height: 2;
+  color: var(--ink-2);
+}
+.prose + .prose { margin-top: 1.3em; }
+.prose a { color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; }
+
+.after-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 24px; }
+
+/* ───────── よくある質問 ───────── */
+
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 34px 20px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 20px;
+  font-family: var(--mono);
+  font-weight: 400;
+  color: var(--ink-3);
+  transition: color 0.2s var(--ease);
+}
+.faq details[open] summary::after { content: "\2212"; }
+.faq summary:hover::after { color: var(--ink); }
+.faq .a {
+  margin: 0 0 24px;
+  max-width: 44rem;
+  font-size: 0.9rem;
+  line-height: 2;
+  color: var(--ink-2);
+}
+.faq .a a { color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; }
+
+/* ───────── 最後の導線 ───────── */
+
+.cta-band {
+  margin-top: clamp(52px, 8vw, 88px);
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: clamp(26px, 4vw, 40px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+}
+.cta-band .t {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cta-band .d {
+  margin: 8px 0 0;
+  font-size: 0.86rem;
+  line-height: 1.9;
+  color: var(--ink-2);
+}
+.cta-band .app-links { margin: 0 0 0 auto; }
+
+@media (max-width: 44rem) {
+  .cta-band .app-links { margin-left: 0; }
+}

@@ -69,7 +69,9 @@
 
 @media (max-width: 52rem) {
   .lp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .lp-hero .shot { max-width: 16rem; margin-inline: auto; }
+  /* 幅を明示しておく（margin:auto だと内容依存の幅になり、
+     画像の読み込み前に領域を確保できない） */
+  .lp-hero .shot { justify-self: center; width: 16rem; max-width: 100%; }
 }
 
 /* ───────── スクリーンショット ───────── */
@@ -170,7 +172,12 @@
   .feature,
   .feature.has-shot { grid-template-columns: 1fr; gap: 0; }
   .feature .n { padding-top: 0; margin-bottom: 12px; font-size: 0.72rem; }
-  .feature.has-shot .shot { margin: 26px auto 0; max-width: 14rem; }
+  .feature.has-shot .shot {
+    justify-self: center;
+    margin: 26px 0 0;
+    width: 14rem;
+    max-width: 100%;
+  }
 }
 
 /* ───────── こんな方に ───────── */

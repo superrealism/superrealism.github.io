@@ -479,13 +479,17 @@ a { color: inherit; }
     gap: 0;
   }
   .app-no { padding-top: 0; margin-bottom: 14px; font-size: 0.72rem; }
-  /* 縦積みでは 名前 → 画面写真 → 説明 の順に読ませる */
+  /* 縦積みでは 名前 → 画面写真 → 説明 の順に読ませる。
+     margin:auto だと内容依存の幅になり、遅延読み込み中に領域を確保できないので
+     幅を明示して justify-self で中央に置く */
   .app-shot {
     grid-column: auto;
     grid-row: auto;
     order: 1;
-    margin: 20px auto 0;
-    max-width: 12rem;
+    justify-self: center;
+    margin: 20px 0 0;
+    width: 12rem;
+    max-width: 100%;
   }
   .app-body { order: 2; margin-top: 18px; }
   /* 狭い画面ではアイコンを名前の左へ並べる */

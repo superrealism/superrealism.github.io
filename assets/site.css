@@ -156,6 +156,7 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
   font-size: 0.95rem; font-weight: 600;
 }
 .btn:hover { opacity: 0.88; }
+.cta .cta-more { margin: 14px 0 0; font-size: 0.9rem; }
 .cta-inline { margin: 26px 0; }
 
 /* 図 */
@@ -178,6 +179,3 @@ figcaption { font-size: 0.84rem; color: var(--muted); margin-top: 6px; }
 .site-footer a { color: var(--muted); }
 .site-footer ul { list-style: none; margin: 0 0 10px; padding: 0;
   display: flex; flex-wrap: wrap; gap: 6px 18px; }
-
-/* アプリ紹介ページ（/lp/*）への導線 */
-.cta .cta-more { margin: 14px 0 0; font-size: 0.9rem; }

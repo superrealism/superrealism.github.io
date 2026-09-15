@@ -141,6 +141,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://superrealism.github.io/bungaku/works/kojin/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://superrealism.github.io/bungaku/works/tadare/</loc>
     <lastmod>2026-07-28</lastmod>
     <priority>0.8</priority>
@@ -191,6 +196,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://superrealism.github.io/bungaku/works/shinju_fujin/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://superrealism.github.io/bungaku/works/chijin_no_ai/</loc>
     <lastmod>2026-07-28</lastmod>
     <priority>0.8</priority>
@@ -233,6 +243,11 @@
   <url>
     <loc>https://superrealism.github.io/bungaku/works/kokushikan_satsujin_jiken/</loc>
     <lastmod>2026-07-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://superrealism.github.io/bungaku/works/kurotokage/</loc>
+    <lastmod>2026-09-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -621,6 +636,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://superrealism.github.io/bungaku/en/works/kojin/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://superrealism.github.io/bungaku/en/works/tadare/</loc>
     <lastmod>2026-07-28</lastmod>
     <priority>0.8</priority>
@@ -671,6 +691,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://superrealism.github.io/bungaku/en/works/shinju_fujin/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://superrealism.github.io/bungaku/en/works/chijin_no_ai/</loc>
     <lastmod>2026-07-28</lastmod>
     <priority>0.8</priority>
@@ -713,6 +738,11 @@
   <url>
     <loc>https://superrealism.github.io/bungaku/en/works/kokushikan_satsujin_jiken/</loc>
     <lastmod>2026-07-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://superrealism.github.io/bungaku/en/works/kurotokage/</loc>
+    <lastmod>2026-09-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

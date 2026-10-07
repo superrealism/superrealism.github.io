@@ -1,0 +1,241 @@
+:root { --accent: #2f6f9f; --accent-dark: #8cc0e6; }
+
+/* 人物相関図（SVGは色を持たず、classにこのCSSで配色を与える。アプリと同じ考え方） */
+svg.chart { width: 100%; height: auto; min-width: 34rem; }
+.chart-card { fill: var(--card); stroke: var(--line); stroke-width: 1.2; }
+.chart-node-male .chart-card { stroke: #4a7fb5; }
+.chart-node-female .chart-card { stroke: #b5657f; }
+.chart-node-main .chart-card { fill: var(--paper-2); stroke-width: 2.6; }
+.chart-name { fill: var(--ink); font-size: 19px; text-anchor: middle; }
+.chart-reading { fill: var(--muted); font-size: 9.5px; text-anchor: middle; }
+.chart-role { fill: var(--muted); font-size: 11.5px; text-anchor: middle; }
+.chart-edge { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.chart-edge-broken { stroke-dasharray: 7 5; }
+.chart-edge-dotted { stroke-dasharray: 2 4; }
+.chart-arrow-head { fill: var(--muted); }
+.chart-label-bg { fill: var(--card); }
+.chart-label { fill: var(--ink); font-size: 11px; text-anchor: middle; }
+svg.chart text { font-family: var(--sans); }
+
+/* ===== 案A「平台」。共通CSSの色と書体を、この作品サイト用に上書きする ===== */
+:root {
+  --paper: #edf2f6;   /* 地（空の地） */
+  --paper-2: #e3ebf2;
+  --card: #ffffff;
+  --ink: #18212b;
+  --muted: #5a6b7d;
+  --line: #d3dce5;
+  --obi: #7a2b41;     /* 帯（紅） */
+  --obi-ink: #fff3f5;
+  --display: "Kaisei Tokumin", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --sans: "Zen Kaku Gothic New", system-ui, -apple-system, "Segoe UI",
+    "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10171f;
+    --paper-2: #18212b;
+    --card: #18212b;
+    --ink: #e4ebf2;
+    --muted: #9fb0c2;
+    --line: #2c3948;
+    --obi: #ffb1c1;
+    --obi-ink: #3b0716;
+  }
+}
+h1, h2, .brand, .shelf .t, .work-hero .title {
+  font-family: var(--display); font-weight: 800; letter-spacing: 0.03em;
+}
+h2 { border-left: 0; padding-left: 0; }
+
+/* ヘッダーとフッターは白い面に置く（共通CSSは地の色を使うが、案Aでは平台の台と同じ白）。
+   ダークでは --card が地より一段明るい面になる */
+.site-header, .site-footer { background: var(--card); }
+/* ヘッダーと本文の間を空ける。
+   本文は <main class="wrap"> なので、共通CSSの `.wrap { padding: 0 20px }`（クラス指定）が
+   `main { padding: ... }`（要素指定）に勝ってしまう。ここは main.wrap で指定する */
+main.wrap { padding-top: clamp(24px, 3vw, 40px); padding-bottom: clamp(40px, 5vw, 64px); }
+.brand { display: inline-flex; align-items: center; gap: 9px; }
+.brand img { width: 26px; height: 26px; border-radius: 7px; }
+
+/* ===== 表紙と帯（外枠は .book-cover。中のSVGは class="cover" を持つ） ===== */
+.book-cover { position: relative; display: block; container-type: inline-size; }
+.book-cover > svg { display: block; width: 100%; height: auto; }
+.book-cover-stack {
+  box-shadow: 3px 3px 0 -1px var(--card), 3px 3px 0 0 var(--line),
+    6px 6px 0 -1px var(--card), 6px 6px 0 0 var(--line), 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+/* 帯は普段は隠し、カーソルを重ねたときだけ出す（装丁をそのまま見せるため）。
+   ホバーのない端末（スマホなど）では出さず、キャッチコピーは表紙の下に文字で出す */
+.book-cover .obi {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 31%; margin: 0;
+  display: flex; align-items: center; padding: 0 8cqw;
+  background: var(--obi); color: var(--obi-ink);
+  font-family: var(--display); font-weight: 700; font-size: 9.6cqw;
+  line-height: 1.35; letter-spacing: 0.02em;
+}
+@media (hover: hover) {
+  .book-cover .obi {
+    opacity: 0; transform: translateY(18%); transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .book-cover:hover .obi, a:hover .book-cover .obi, a:focus-visible .book-cover .obi {
+    opacity: 1; transform: none;
+  }
+}
+@media (hover: none) {
+  .book-cover .obi { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-cover .obi { transition: none; transform: none; }
+}
+
+/* ===== トップの見出し（呼びかけの一文が h1。表紙は下の棚で見せる） ===== */
+.hiradai { margin: 0 0 28px; }
+.hiradai .h {
+  font-family: var(--display); font-weight: 800; color: var(--ink);
+  /* 画面幅に追従させ、1行に収める（折り返すと呼びかけの調子が崩れるため） */
+  font-size: clamp(15px, 4.3vw, 42px); line-height: 1.3; letter-spacing: 0.02em;
+  margin: 0 0 14px; white-space: nowrap;
+}
+.hiradai p { margin: 0 0 4px; max-width: 46em; color: var(--muted); }
+/* アプリへのボタン。上下の空きを同じにする（下は .hiradai の余白が受け持つ） */
+.hiradai .get { margin: 28px 0 0; }
+
+/* アプリへの導線のボタンは Playストアの「インストール」と同じ緑。
+   共通CSSの .btn（リンク色＝--accent）より鮮やかにして、ここが目的地だと分かるようにする */
+.btn { background: #01875f; color: #ffffff; }
+.btn:hover { background: #0a9e72; opacity: 1; }
+@media (prefers-color-scheme: dark) {
+  /* 暗い地では緑が沈むので一段明るくする */
+  .btn { background: #0a9e72; }
+  .btn:hover { background: #17b183; }
+}
+
+/* ===== 表紙つきの棚。トップは横スクロール、一覧は折り返し ===== */
+.shelf {
+  display: grid; gap: clamp(14px, 2.2vw, 26px); margin: 0; padding: 6px 0 10px;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(104px, 14vw, 150px), 1fr));
+}
+.shelf-scroll {
+  grid-template-columns: none; grid-auto-flow: column;
+  grid-auto-columns: clamp(104px, 14vw, 150px);
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity;
+}
+.shelf-scroll > li { scroll-snap-align: start; }
+.shelf a { display: block; color: inherit; text-decoration: none; }
+.shelf .t { display: block; margin-top: 14px; font-size: 0.98rem; line-height: 1.5; }
+.shelf .m { display: block; font-size: 0.78rem; color: var(--muted); }
+.shelf a:hover .t { color: var(--accent); }
+
+/* ===== 作品ページの見出し（表紙＋帯＋アプリへの導線） ===== */
+.work-hero {
+  display: grid; grid-template-columns: clamp(150px, 22vw, 240px) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 40px); align-items: start; margin: 0 0 32px;
+}
+.work-hero .side .btn { display: block; margin-top: 18px; text-align: center; }
+.work-hero .side .note { margin: 8px 0 0; font-size: 0.78rem; text-align: center; }
+.work-hero .lead { margin: 0 0 12px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.badge {
+  display: inline-block; font-size: 0.78rem; line-height: 1.8; padding: 0 12px;
+  border-radius: 999px; background: var(--card); color: var(--muted);
+  border: 1px solid var(--line);
+}
+.badge-obi { background: var(--obi); color: var(--obi-ink); border-color: transparent; font-weight: 700; }
+.work-hero .title { margin: 0 0 8px; font-size: clamp(23px, 3.2vw, 34px); line-height: 1.38; }
+.work-hero .lead { color: var(--muted); font-size: 0.98rem; }
+.work-meta { margin: 12px 0 0; font-size: 0.92rem; color: var(--muted); }
+.work-meta .author { color: var(--accent); font-weight: 700; text-decoration: none; }
+.work-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: 1px;
+  margin: 16px 0 0; background: var(--line); border: 1px solid var(--line);
+  border-radius: 12px; overflow: hidden;
+}
+.work-stats > div { background: var(--card); padding: 10px 14px; }
+.work-stats dt { margin: 0; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
+.work-stats dd {
+  margin: 0; font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+.work-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; }
+.work-tabs a {
+  font-size: 0.86rem; line-height: 1.9; padding: 0 14px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--line); color: var(--muted); text-decoration: none;
+}
+.work-tabs a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ===== 読み物の本文（概要・あらすじ）は白い面に載せる ===== */
+.panel {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: clamp(16px, 2.4vw, 22px) clamp(18px, 2.6vw, 26px);
+}
+.panel p:last-child { margin-bottom: 0; }
+@media (max-width: 34rem) {
+  .work-hero { grid-template-columns: minmax(0, 1fr); }
+  .work-hero .side {
+    display: grid; grid-template-columns: minmax(0, 130px) minmax(0, 1fr);
+    gap: 16px; align-items: center;
+  }
+  .work-hero .side .btn { margin-top: 0; }
+}
+
+/* ===== 作品一覧の行（全作品ぶん。ここは表紙を出さず文字だけで並べる） ===== */
+.rows.works > li {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 11em) 3.4em;
+  gap: 2px 14px; align-items: baseline;
+}
+.rows.works .a { font-size: 0.86rem; color: var(--muted); }
+.rows.works .y {
+  font-size: 0.82rem; color: var(--muted); text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 34rem) {
+  /* 狭い画面では作家名を2行目へ送り、発表年は題の右端に置く */
+  .rows.works > li { grid-template-columns: minmax(0, 1fr) auto; }
+  .rows.works .a { grid-column: 1; grid-row: 2; }
+  .rows.works .y { grid-column: 2; grid-row: 1; }
+}
+
+/* ===== 用語索引の行（用語名と一言の説明を横に並べる） ===== */
+.rows.terms > li {
+  display: grid; grid-template-columns: minmax(0, 13em) minmax(0, 1fr);
+  gap: 2px 16px; align-items: baseline;
+}
+.rows.terms .m { font-size: 0.86rem; color: var(--muted); }
+/* 英語の用語名は「Keimō-shugi (Enlightenment Thought)」のように長く、
+   日本語向けの13emでは171行中56行が折り返してしまう。英語だけ列を広げる */
+html[lang="en"] .rows.terms > li {
+  grid-template-columns: minmax(0, 24em) minmax(0, 1fr);
+}
+@media (max-width: 34rem) {
+  /* 狭い画面では説明を用語名の下へ送る */
+  .rows.terms > li { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ===== 名文索引の行（作家名・その作家の一節・件数） ===== */
+.rows.passages > li {
+  display: grid; grid-template-columns: minmax(0, 10em) minmax(0, 1fr) 4.5em;
+  gap: 2px 16px; align-items: baseline;
+}
+.rows.passages .q { font-family: var(--display); color: var(--muted); font-size: 0.92rem; }
+.rows.passages .n {
+  font-size: 0.82rem; color: var(--muted); text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+/* 英語は作家名も一節も長くなるので列を広げる（用語索引と同じ考え方） */
+html[lang="en"] .rows.passages > li {
+  grid-template-columns: minmax(0, 14em) minmax(0, 1fr) 6.5em;
+}
+@media (max-width: 34rem) {
+  .rows.passages > li { grid-template-columns: minmax(0, 1fr) 4.5em; }
+  .rows.passages .q { grid-column: 1 / -1; }
+}
+
+/* 引用の中に添える一言鑑賞。引用本文は明朝、鑑賞はゴシックにして役割を分ける */
+.quote .note { margin: 8px 0 0; font-family: var(--sans); }
+
+/* ===== 作家一覧の行に添える小さな表紙 ===== */
+.rows.with-cover > li {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: center;
+}

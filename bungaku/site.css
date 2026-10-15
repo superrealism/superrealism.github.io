@@ -203,11 +203,6 @@ main.wrap { padding-top: clamp(24px, 3vw, 40px); padding-bottom: clamp(40px, 5vw
   gap: 2px 16px; align-items: baseline;
 }
 .rows.terms .m { font-size: 0.86rem; color: var(--muted); }
-/* 英語の用語名は「Keimō-shugi (Enlightenment Thought)」のように長く、
-   日本語向けの13emでは171行中56行が折り返してしまう。英語だけ列を広げる */
-html[lang="en"] .rows.terms > li {
-  grid-template-columns: minmax(0, 24em) minmax(0, 1fr);
-}
 @media (max-width: 34rem) {
   /* 狭い画面では説明を用語名の下へ送る */
   .rows.terms > li { grid-template-columns: minmax(0, 1fr); }
@@ -222,10 +217,6 @@ html[lang="en"] .rows.terms > li {
 .rows.passages .n {
   font-size: 0.82rem; color: var(--muted); text-align: right;
   font-variant-numeric: tabular-nums;
-}
-/* 英語は作家名も一節も長くなるので列を広げる（用語索引と同じ考え方） */
-html[lang="en"] .rows.passages > li {
-  grid-template-columns: minmax(0, 14em) minmax(0, 1fr) 6.5em;
 }
 @media (max-width: 34rem) {
   .rows.passages > li { grid-template-columns: minmax(0, 1fr) 4.5em; }

@@ -1,0 +1,13 @@
+# エディタ / IDE
+.idea/
+*.iml
+.vscode/
+
+# OS が勝手に作るもの
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 作業用
+_preview.html
+_dark.html
